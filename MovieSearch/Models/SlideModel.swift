@@ -10,4 +10,6 @@ import UIKit
 struct SlideModel {
     let text: String
     let image: UIImage
+    let image2: UIImage
+    let colorText: UIColor
 }

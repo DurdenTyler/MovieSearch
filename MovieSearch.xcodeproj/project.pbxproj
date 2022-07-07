@@ -22,6 +22,7 @@
 		DD1702C928687F4700B64E60 /* SlideModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1702C828687F4700B64E60 /* SlideModel.swift */; };
 		DD1702CB28687FED00B64E60 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1702CA28687FED00B64E60 /* OnBoardingViewController.swift */; };
 		DD1702CF2868808100B64E60 /* OnBoardingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1702CE2868808100B64E60 /* OnBoardingViewCell.swift */; };
+		DDD6D3A928772493009762D0 /* SFProDisplay-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = DDD6D3A828772493009762D0 /* SFProDisplay-Bold.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		DD1702C828687F4700B64E60 /* SlideModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideModel.swift; sourceTree = "<group>"; };
 		DD1702CA28687FED00B64E60 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		DD1702CE2868808100B64E60 /* OnBoardingViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewCell.swift; sourceTree = "<group>"; };
+		DDD6D3A828772493009762D0 /* SFProDisplay-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Bold.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 			children = (
 				DD17029E2868751A00B64E60 /* AppDelegate.swift */,
 				DD1702A02868751A00B64E60 /* SceneDelegate.swift */,
+				DDD6D3A72877247F009762D0 /* Fonts */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -172,6 +175,14 @@
 				DD1702CE2868808100B64E60 /* OnBoardingViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		DDD6D3A72877247F009762D0 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				DDD6D3A828772493009762D0 /* SFProDisplay-Bold.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,6 +245,7 @@
 			files = (
 				DD1702AB2868751B00B64E60 /* LaunchScreen.storyboard in Resources */,
 				DD1702A82868751B00B64E60 /* Assets.xcassets in Resources */,
+				DDD6D3A928772493009762D0 /* SFProDisplay-Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

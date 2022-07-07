@@ -13,16 +13,27 @@ class OnBoardingViewCell: UICollectionViewCell {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFill
+        return image
+    }()
+    
+    let image_small: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.contentMode = .scaleAspectFill
         image.layer.cornerRadius = 10
+        image.layer.borderColor = UIColor.orange.cgColor
+        image.layer.borderWidth = 8
+        image.clipsToBounds = true
         return image
     }()
     
     private let text: UILabel = {
         let label = UILabel()
         label.textColor = .black
-        label.font = UIFont(name: "Roboto-Medium", size: 24)
+        label.font = UIFont(name: "Roboto-Medium", size: 42)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 2
         return label
     }()
     
@@ -40,28 +51,41 @@ class OnBoardingViewCell: UICollectionViewCell {
         self.backgroundColor = .white
         self.addSubview(image)
         self.addSubview(text)
+        self.addSubview(image_small)
     }
     
     func cellConfigure(slide: SlideModel) {
-        image.image = slide.image
+        image.image = slide.image2
+        image_small.image = slide.image
         text.text = slide.text
+        text.textColor = slide.colorText
     }
+    
 }
 
 // MARK: - setConstrains
 extension OnBoardingViewCell {
     private func setConstrains() {
         NSLayoutConstraint.activate([
-            text.topAnchor.constraint(equalTo: topAnchor, constant: 20),
-            text.centerXAnchor.constraint(equalTo: self.centerXAnchor)
+            text.topAnchor.constraint(equalTo: self.topAnchor, constant: 85),
+            text.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            text.widthAnchor.constraint(equalToConstant: 350)
         ])
         
         NSLayoutConstraint.activate([
-            image.topAnchor.constraint(equalTo: text.bottomAnchor, constant: 30),
-            image.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            image.heightAnchor.constraint(equalToConstant: 350),
-            image.widthAnchor.constraint(equalToConstant: 150)
+            image_small.topAnchor.constraint(equalTo: self.topAnchor, constant: 160),
+            image_small.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 25),
+            image_small.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -25),
+            image_small.heightAnchor.constraint(equalToConstant: 450)
+        ])
+        
+        NSLayoutConstraint.activate([
+            image.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
+            image.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
+            image.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0),
+            image.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)
         ])
     }
 }
+
 
