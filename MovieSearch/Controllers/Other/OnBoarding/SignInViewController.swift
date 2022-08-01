@@ -30,6 +30,20 @@ class SignInViewController: UIViewController {
         return view
     }()
     
+    private let view_Circle4: UIView = {
+        let view = UIImageView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .black
+        return view
+    }()
+    
+    private let view_Circle5: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = #colorLiteral(red: 0, green: 0.7852093963, blue: 0.7002510895, alpha: 1)
+        return view
+    }()
+    
     private let text_SignIn: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -123,6 +137,8 @@ class SignInViewController: UIViewController {
         view_Circle1.layer.cornerRadius = view_Circle1.frame.width / 2
         view_Circle2.layer.cornerRadius = view_Circle2.frame.width / 2
         view_Circle3.layer.cornerRadius = view_Circle3.frame.width / 2
+        view_Circle4.layer.cornerRadius = view_Circle4.frame.width / 2
+        view_Circle5.layer.cornerRadius = view_Circle5.frame.width / 2
     }
     
     private func setupViews() {
@@ -130,6 +146,8 @@ class SignInViewController: UIViewController {
         view.addSubview(view_Circle1)
         view.addSubview(view_Circle3)
         view.addSubview(view_Circle2)
+        view.addSubview(view_Circle4)
+        view.addSubview(view_Circle5)
         view.addSubview(text_SignIn)
         view.addSubview(textField_login)
         view.addSubview(textField_password)
@@ -144,11 +162,46 @@ class SignInViewController: UIViewController {
     }
     
     @objc private func func_go() {
-        ///
+        
+        guard let textEmail = textField_login.text else { return }
+        let emailCount = textEmail.filter {$0.isNumber || $0.isLetter}.count
+        if textEmail.contains("@") && textEmail.contains(".") && emailCount > 3 {
+            textField_login.backgroundColor = #colorLiteral(red: 0.982159555, green: 0.982159555, blue: 0.982159555, alpha: 1)
+        } else {
+            textField_login.backgroundColor = #colorLiteral(red: 1, green: 0.3519983888, blue: 0.2944571674, alpha: 1)
+            simpleAlertOK(title: "Ошибка", message: "Введите правильный email")
+        }
+        
+        guard let textPass = textField_password.text else { return }
+        let textPassCount = textPass.filter {$0.isNumber || $0.isLetter}.count
+        if textPassCount <= 5 {
+            textField_password.backgroundColor = #colorLiteral(red: 1, green: 0.3519983888, blue: 0.2944571674, alpha: 1)
+            simpleAlertOK(title: "Ошибка", message: "Пароль должен быть длиннее")
+        } else {
+            textField_password.backgroundColor = #colorLiteral(red: 0.982159555, green: 0.982159555, blue: 0.982159555, alpha: 1)
+        }
+        
+        AuthService.shared.signIn(email: textEmail, password: textPass) { result in
+            switch result {
+            case .success(_):
+                
+                self.simpleAlertOK(title: "Успешно", message: "Вы успешно авторизованы")
+                
+                let vc = HomeViewController()
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true)
+                        
+            case .failure(let error):
+                
+                self.simpleAlertOK(title: "Ошибка", message: "Ошибка регистрации \(error.localizedDescription)")
+            }
+        }
     }
     
     @objc private func func_reg() {
-        ///
+        let vc = SignUpViewController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: false)
     }
 
 
@@ -216,8 +269,22 @@ extension SignInViewController {
         ])
         
         NSLayoutConstraint.activate([
-            button_reg.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: 62),
+            button_reg.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: 65),
             button_reg.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8)
+        ])
+        
+        NSLayoutConstraint.activate([
+            view_Circle4.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            view_Circle4.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 20),
+            view_Circle4.widthAnchor.constraint(equalToConstant: 80),
+            view_Circle4.heightAnchor.constraint(equalToConstant: 80)
+        ])
+        
+        NSLayoutConstraint.activate([
+            view_Circle5.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            view_Circle5.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            view_Circle5.widthAnchor.constraint(equalToConstant: 60),
+            view_Circle5.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
 }
